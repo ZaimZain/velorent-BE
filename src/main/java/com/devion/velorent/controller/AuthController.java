@@ -24,6 +24,12 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto request, HttpSession session) {
+        // **Change**: Check if user is already logged in (active session)
+        if (session.getAttribute("user") != null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                                 .body(new LoginResponseDto(false, "Already logged in", null, null));
+        }
+
         Optional<AppUser> optionalUser = userRepository.findByUsername(request.getUsername());
 
         if (optionalUser.isPresent()) {
