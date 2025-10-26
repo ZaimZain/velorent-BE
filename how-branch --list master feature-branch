@@ -1,0 +1,127 @@
+[33mcommit b3f9387c1c5465454fb4ad64a1d88c86496f5638[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mallEntities[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: 1578c38 78664c3
+Author: ZaimZain <60647555+ZaimZain@users.noreply.github.com>
+Date:   Wed May 14 04:33:09 2025 +0800
+
+    Merge pull request #3 from ZaimZain/feature/addCar
+    
+    Feature/add car
+
+[33mcommit 78664c34f7b441348ddd5aa5d31a30370f5464cd[m[33m ([m[1;31morigin/feature/addCar[m[33m)[m
+Author: ZaimZain <zaim.shahiran@gmail.com>
+Date:   Wed May 14 04:24:41 2025 +0800
+
+    Working Add Car Function
+
+M	src/main/java/com/devion/velorent/config/SecurityConfig.java
+M	src/main/java/com/devion/velorent/controller/CarController.java
+A	src/sql/cars
+A	src/sql/users
+
+[33mcommit 1578c38b1730ad1426843b418fbc312bb7dca366[m
+Merge: f76d2ad 65bf92d
+Author: ZaimZain <60647555+ZaimZain@users.noreply.github.com>
+Date:   Mon May 12 05:24:12 2025 +0800
+
+    Merge pull request #1 from ZaimZain/feature/authentication
+    
+    Feature/authentication
+
+[33mcommit b8f461a05b6969e22c2afafb3b420d60f812b41a[m
+Author: ZaimZain <zaim.shahiran@gmail.com>
+Date:   Mon May 12 05:23:46 2025 +0800
+
+    Security Auth
+
+M	src/main/java/com/devion/velorent/config/SecurityConfig.java
+M	src/main/java/com/devion/velorent/controller/AuthController.java
+M	src/main/resources/application.properties
+M	src/test/index.html
+
+[33mcommit 531b530d4f49e2fbab680baf924683dd8da9bffa[m
+Author: ZaimZain <zaim.shahiran@gmail.com>
+Date:   Mon May 12 05:16:16 2025 +0800
+
+    Add Car Services
+
+A	src/main/java/com/devion/velorent/controller/CarController.java
+A	src/main/java/com/devion/velorent/dto/CarDto.java
+A	src/main/java/com/devion/velorent/entity/Car.java
+A	src/main/java/com/devion/velorent/repository/CarRepository.java
+A	src/main/java/com/devion/velorent/service/CarService.java
+
+[33mcommit 65bf92d46526e67fb13cb53cd41cbce549bf8c99[m[33m ([m[1;31morigin/feature/authentication[m[33m)[m
+Author: ZaimZain <zaim.shahiran@gmail.com>
+Date:   Mon Apr 21 00:10:49 2025 +0800
+
+    Authentication and Authorization complete. Run index.html to test it.
+
+M	pom.xml
+A	src/main/java/com/devion/velorent/config/PasswordEncoderConfig.java
+A	src/main/java/com/devion/velorent/config/SecurityConfig.java
+A	src/main/java/com/devion/velorent/config/WebConfig.java
+M	src/main/java/com/devion/velorent/controller/AuthController.java
+A	src/main/java/com/devion/velorent/controller/HelloController.java
+A	src/main/java/com/devion/velorent/dto/DtoMapper.java
+A	src/main/java/com/devion/velorent/dto/LoginRequestDto.java
+A	src/main/java/com/devion/velorent/dto/LoginResponseDto.java
+R068	src/main/java/com/devion/velorent/entity/User.java	src/main/java/com/devion/velorent/entity/AppUser.java
+M	src/main/java/com/devion/velorent/repository/UserRepository.java
+A	src/main/java/com/devion/velorent/service/CustomUserDetailsService.java
+M	src/main/resources/application.properties
+A	src/test/index.html
+
+[33mcommit eaeeb736c9ad0a56619a6cbb6b0f2a4eff261650[m
+Author: ZaimZain <zaim.shahiran@gmail.com>
+Date:   Sun Apr 20 03:58:20 2025 +0800
+
+    hardcoded username and password as user
+
+M	pom.xml
+M	src/main/java/com/devion/velorent/controller/AuthController.java
+D	src/main/java/com/devion/velorent/security/JwtUtil.java
+D	src/main/java/com/devion/velorent/security/SecurityConfig.java
+M	src/main/resources/application.properties
+
+[33mcommit 68bf91f778ad54e25fd3fd3928d1e2372599db52[m
+Author: ZaimZain <zaim.shahiran@gmail.com>
+Date:   Sun Apr 20 03:03:09 2025 +0800
+
+    Still error in jwt
+
+M	pom.xml
+A	src/main/java/com/devion/velorent/controller/AuthController.java
+A	src/main/java/com/devion/velorent/entity/Role.java
+A	src/main/java/com/devion/velorent/entity/User.java
+A	src/main/java/com/devion/velorent/repository/UserRepository.java
+A	src/main/java/com/devion/velorent/security/JwtUtil.java
+A	src/main/java/com/devion/velorent/security/SecurityConfig.java
+M	src/main/resources/application.properties
+
+[33mcommit f76d2adaaa437817245ace925d31156f28c5e4d8[m
+Author: ZaimZain <zaim.shahiran@gmail.com>
+Date:   Sun Apr 20 01:57:10 2025 +0800
+
+    Pilot Project with MySQL Connection
+
+A	.gitignore
+A	pom.xml
+A	src/main/java/com/devion/velorent/VelorentApplication.java
+A	src/main/resources/application.properties
+A	src/test/java/com/devion/velorent/VelorentApplicationTests.java
+
+[33mcommit 4677b109971febdcd62c49abfe2d8f18cc73f36f[m
+Author: ZaimZain <60647555+ZaimZain@users.noreply.github.com>
+Date:   Sat Apr 19 23:26:05 2025 +0800
+
+    Update README.md
+
+M	README.md
+
+[33mcommit 8c55f9c836f162583133cf75922bffabd8acbfe1[m
+Author: ZaimZain <60647555+ZaimZain@users.noreply.github.com>
+Date:   Sun Oct 13 08:50:54 2024 +0800
+
+    Initial commit
+
+A	README.md
