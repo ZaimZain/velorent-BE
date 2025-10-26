@@ -28,6 +28,10 @@ public class Car {
     @Column(name = "price_per_day")
     private double pricePerDay;
 
+    private boolean available = true;
+    private String transmission = "Auto";
+    private int seats = 5;
+
     @Column(name = "created_at", updatable = false, insertable = false)
     private LocalDateTime createdAt;
 }
