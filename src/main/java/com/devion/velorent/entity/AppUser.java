@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +24,17 @@ public class AppUser {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(unique = true)
+    private String email;
+
+    private String phone;
+    private String address;
+
+    @Column(name = "created_at", updatable = false, insertable = false)
+    private LocalDateTime createdAt;
 }
 
