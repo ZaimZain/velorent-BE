@@ -25,7 +25,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto request, HttpSession session) {
         // **Change**: Check if user is already logged in (active session)
-        if (session.getAttribute("user") != null) {
+        if (session.getAttribute("username") != null) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                                  .body(new LoginResponseDto(false, "Already logged in", null, null));
         }
@@ -35,7 +35,7 @@ public class AuthController {
         if (optionalUser.isPresent()) {
             AppUser user = optionalUser.get();
             if (request.getPassword().equals(user.getPassword())) { // Replace with password hashing check in production
-                session.setAttribute("user", user);
+                session.setAttribute("username", user);
                 return ResponseEntity.ok(new LoginResponseDto(true, "Login successful", user.getUsername(), user.getRole()));
             }
         }

@@ -1,6 +1,6 @@
 package com.devion.velorent.dto;
 
-import com.devion.velorent.entity.Role;
+import com.devion.velorent.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
