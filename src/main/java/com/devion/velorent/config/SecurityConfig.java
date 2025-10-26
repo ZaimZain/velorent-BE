@@ -23,6 +23,7 @@ public class SecurityConfig {
 //                .csrf(csrf -> csrf.disable()) // Disable for testing (enable in prod)
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers("/api/auth/**").permitAll()
+                                .requestMatchers("/api/cars/**").permitAll()
                                 .anyRequest().authenticated()
 //                            .anyRequest().permitAll() // Disable for testing (enable in prod)
                 )
