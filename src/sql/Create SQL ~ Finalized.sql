@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS velorentdb.rentals (
   rental_id BIGINT AUTO_INCREMENT PRIMARY KEY,
   car_id BIGINT,
   customer_id BIGINT,
+  total_amount DECIMAL(10,2),
   start_date DATE,
   end_date DATE,
   pickup_location VARCHAR(255),
@@ -98,7 +99,6 @@ CREATE TABLE IF NOT EXISTS velorentdb.rentals (
 CREATE TABLE IF NOT EXISTS velorentdb.payments (
   payment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
   rental_id BIGINT,
-  total_amount DECIMAL(10,2),
   paid_amount DECIMAL(10,2),
   payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   payment_method ENUM('CREDITCARD','BANKTRANSFER','CASH','EWALLET') NOT NULL,

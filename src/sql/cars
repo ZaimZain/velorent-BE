@@ -1,9 +1,0 @@
-CREATE TABLE cars (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    brand VARCHAR(100) NOT NULL,
-    model VARCHAR(100) NOT NULL,
-    type VARCHAR(50) NOT NULL,
-    year INT NOT NULL,
-    price_per_day DECIMAL(10,2) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);

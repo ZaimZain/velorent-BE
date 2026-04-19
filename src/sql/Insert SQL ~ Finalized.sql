@@ -95,24 +95,25 @@ VALUES
 
 -- RENTALS
 INSERT INTO `velorentdb`.`rentals`
-(`car_id`, `customer_id`, `start_date`, `end_date`, `pickup_location`, `dropoff_location`, `rental_status`)
+(`car_id`, `customer_id`, `total_amount`, `start_date`, `end_date`, `pickup_location`, `dropoff_location`, `rental_status`)
 VALUES
-(3, 1, '2025-09-20', '2025-10-01', 'Pejabat Pusat Bandar', 'Pejabat Pusat Bandar', 'COMPLETED'),
-(4, 2, '2025-09-25', '2025-09-28', 'Terminal Lapangan Terbang', 'Terminal Lapangan Terbang', 'ACTIVE'),
-(9, 3, '2025-10-01', '2025-10-14', 'KL', 'KL', 'PENDING'),
-(10, 4, '2025-10-01', '2025-10-14', 'KL', 'KL', 'UPCOMING'),
-(13, 6, '2025-10-01', '2025-10-14', 'KL', 'KL', 'CANCELLED'),
-(13, 6, '2025-10-01', '2025-10-14', 'KL', 'KL', 'REJECTED');
+(3, 1, 500.00, '2025-09-20', '2025-10-01', 'Pejabat Pusat Bandar', 'Pejabat Pusat Bandar', 'COMPLETED'),
+(4, 2, 300.00, '2025-09-25', '2025-09-28', 'Terminal Lapangan Terbang', 'Terminal Lapangan Terbang', 'ACTIVE'),
+(9, 3, 1000.00, '2025-10-01', '2025-10-14', 'KL', 'KL', 'PENDING'),
+(10, 4, 1000.00, '2025-10-01', '2025-10-14', 'KL', 'KL', 'UPCOMING'),
+(13, 6, 1000.00, '2025-10-01', '2025-10-14', 'KL', 'KL', 'CANCELLED'),
+(13, 6, 700.00, '2025-10-01', '2025-10-14', 'KL', 'KL', 'REJECTED');
+
 
 -- PAYMENTS
 INSERT INTO `velorentdb`.`payments`
-(`rental_id`, `total_amount`, `paid_amount`, `payment_method`, `payment_status`)
+(`rental_id`, `paid_amount`, `payment_method`, `payment_status`)
 VALUES
-('1', 500.00, 500.00, 'CREDITCARD', 'PAID'),
-('2', 300.00, 300.00, 'BANKTRANSFER', 'PAID'),
-('3', 1000.00, 1000.00, 'CASH', 'PAID'),
-('4', 1000.00, 500.00, 'EWALLET', 'FAILED'),
-('4', 1000.00, 500.00, 'EWALLET', 'PARTIAL');
+('1', 500.00, 'CREDITCARD', 'PAID'),
+('2', 300.00, 'BANKTRANSFER', 'PAID'),
+('3', 1000.00, 'CASH', 'PAID'),
+('4', 500.00, 'EWALLET', 'FAILED'),
+('4', 500.00, 'EWALLET', 'PARTIAL');
 
 -- ~PHASE 2~
 -- REVIEWS
