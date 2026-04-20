@@ -13,10 +13,10 @@ VALUES
 (2, 'Ahmad Car Rental', '900101-14-5677');
 
 -- CUSTOMERS
-INSERT INTO customers (identification_number, identification_type, license_number)
+INSERT INTO customers (customer_id, identification_number, identification_type, license_number)
 VALUES 
-('A12345678', 'passport', 'A1234567MY'),
-('930811035807', 'ic', 'A7654321MY');
+(1, 'A12345678', 'passport', 'A1234567MY'),
+(3, '930811035807', 'ic', 'A7654321MY');
 
 -- CARS
 INSERT INTO cars (renter_id, brand, model, body_type, fuel_type, transmission, seat, year, plate_number, price_per_day, status, description)
@@ -34,8 +34,8 @@ VALUES
 -- RENTALS
 INSERT INTO rentals (customer_id, car_id, start_date, end_date, total_price, status)
 VALUES
-(2, 1, '2025-10-01', '2025-10-03', 360.00, 'completed'),
-(1, 3, '2025-10-10', '2025-10-12', 360.00, 'pending');
+(3, 1, '2025-10-01', '2025-10-03', 360.00, 'completed'),
+(1, 2, '2025-10-10', '2025-10-12', 360.00, 'pending');
 
 -- PAYMENTS
 INSERT INTO payments (rental_id, amount, payment_method, status)

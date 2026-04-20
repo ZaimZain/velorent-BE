@@ -35,11 +35,13 @@ CREATE TABLE IF NOT EXISTS velorentdb.renters (
 
 -- CUSTOMERS
 CREATE TABLE IF NOT EXISTS velorentdb.customers (
-  customer_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  customer_id BIGINT PRIMARY KEY,
   identification_number VARCHAR(50),
   identification_type ENUM('IC', 'PASSPORT') DEFAULT NULL,
   license_number VARCHAR(50),
-  FOREIGN KEY (customer_id) REFERENCES users(user_id) ON DELETE CASCADE
+  FOREIGN KEY (customer_id) REFERENCES users(user_id) 
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 -- CARS
@@ -81,6 +83,8 @@ CREATE TABLE IF NOT EXISTS velorentdb.rentals (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
   FOREIGN KEY (car_id) REFERENCES cars(car_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 -- PAYMENTS
