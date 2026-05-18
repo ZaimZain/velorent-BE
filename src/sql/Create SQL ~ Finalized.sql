@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS velorentdb.users (
   email VARCHAR(100) UNIQUE,
   phone VARCHAR(20),
   address VARCHAR(255),
-  id_number VARCHAR(25),
-  id_type ENUM('SSM', 'IC', 'PASSPORT'),
+  id_number VARCHAR(25) NOT NULL,
+  id_type ENUM('SSM', 'IC', 'PASSPORT') NOT NULL,
   role ENUM('ADMIN', 'RENTER', 'CUSTOMER') NOT NULL,
   user_status ENUM('ACTIVE', 'DORMANT', 'INACTIVE') NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS velorentdb.users (
 -- CARS
 CREATE TABLE IF NOT EXISTS velorentdb.cars (
   car_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  renter_id BIGINT,
+  renter_id BIGINT NOT NULL,
   brand VARCHAR(50),
   model VARCHAR(50),
   body_type VARCHAR(50),
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS velorentdb.cars (
 -- CAR IMAGES
 CREATE TABLE IF NOT EXISTS velorentdb.car_images (
   image_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  car_id BIGINT,
+  car_id BIGINT NOT NULL,
   image_url VARCHAR(255),
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -81,8 +81,8 @@ CREATE TABLE IF NOT EXISTS velorentdb.customers (
 -- RENTALS
 CREATE TABLE IF NOT EXISTS velorentdb.rentals (
   rental_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  car_id BIGINT,
-  customer_id BIGINT,
+  car_id BIGINT NOT NULL,
+  customer_id BIGINT NOT NULL,
   total_amount DECIMAL(10,2),
   start_date DATE,
   end_date DATE,
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS velorentdb.rentals (
 -- PAYMENTS
 CREATE TABLE IF NOT EXISTS velorentdb.payments (
   payment_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  rental_id BIGINT,
+  rental_id BIGINT NOT NULL,
   paid_amount DECIMAL(10,2),
   payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   payment_method ENUM('CREDITCARD','BANKTRANSFER','CASH','EWALLET') NOT NULL,

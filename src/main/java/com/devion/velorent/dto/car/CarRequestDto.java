@@ -1,0 +1,31 @@
+package com.devion.velorent.dto.car;
+
+import com.devion.velorent.enums.CarStatus;
+import com.devion.velorent.enums.FuelType;
+import com.devion.velorent.enums.Transmission;
+import lombok.*;
+
+import java.math.BigDecimal;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class CarRequestDto {
+
+    // No renterId here because renter comes from logged-in session
+
+    private String brand;
+    private String model;
+    private String bodyType;
+    private String color;
+    private Integer mileage;
+    private Integer seat;
+    private Integer year;
+    private String plateNumber;
+    private BigDecimal dailyRate;
+    private String description;
+    private FuelType fuelType;
+    private Transmission transmission;
+    private CarStatus carStatus;
+}

@@ -1,23 +1,25 @@
 package com.devion.velorent.service;
 
-import com.devion.velorent.entity.Car;
-import com.devion.velorent.repository.CarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.devion.velorent.dto.car.CarRequestDto;
+import com.devion.velorent.dto.car.CarResponseDto;
+import com.devion.velorent.entity.AppUser;
+import com.devion.velorent.enums.CarStatus;
 
 import java.util.List;
 
-@Service
-public class CarService {
+public interface CarService {
 
-    @Autowired
-    private CarRepository carRepository;
+    CarResponseDto createCar(CarRequestDto requestDto, AppUser loggedInUser);
 
-    public Car addCar(Car car) {
-        return carRepository.save(car);
-    }
+    List<CarResponseDto> getAllCars();
 
-    public List<Car> getAllCars() {
-        return carRepository.findAll();
-    }
+    CarResponseDto getCarById(Long carId);
+
+    List<CarResponseDto> getMyCars(AppUser loggedInUser);
+
+    List<CarResponseDto> getCarsByStatus(CarStatus carStatus);
+
+    CarResponseDto updateCar(Long carId, CarRequestDto requestDto, AppUser loggedInUser);
+
+    void deleteCar(Long carId, AppUser loggedInUser);
 }
