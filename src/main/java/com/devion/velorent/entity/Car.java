@@ -3,6 +3,7 @@ package com.devion.velorent.entity;
 import com.devion.velorent.enums.CarStatus;
 import com.devion.velorent.enums.FuelType;
 import com.devion.velorent.enums.Transmission;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,13 +18,14 @@ import java.util.List;
 @Entity
 @Table(name = "cars")
 public class Car {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "car_id")
     private Long carId;
 
     @ManyToOne
-    @JoinColumn(name = "renter_id")
+    @JoinColumn(name = "renter_id", nullable = false)
     private AppUser renter;
 
     private String brand;
@@ -33,8 +35,9 @@ public class Car {
     private String bodyType;
 
     private String color;
-    private int mileage;
-    private int seat;
+
+    private Integer mileage;
+    private Integer seat;
     private Integer year;
 
     @Column(name = "plate_number", length = 20, unique = true)
@@ -43,7 +46,6 @@ public class Car {
     @Column(name = "daily_rate", precision = 10, scale = 2)
     private BigDecimal dailyRate;
 
-    @Column(name = "description")
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -63,9 +65,11 @@ public class Car {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarImage> carImages;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "car")
     private List<Rental> rentals;
 }

@@ -2,6 +2,7 @@ package com.devion.velorent.repository;
 
 import com.devion.velorent.entity.Car;
 import com.devion.velorent.enums.CarStatus;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,7 +16,12 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     boolean existsByPlateNumberAndCarIdNot(String plateNumber, Long carId);
 
-    List<Car> findByCarStatus(CarStatus carStatus);
+    @EntityGraph(attributePaths = {"carImages", "renter"})
+    Optional<Car> findByCarId(Long carId);
 
+    @EntityGraph(attributePaths = {"carImages", "renter"})
     List<Car> findByRenterUserId(Long renterId);
+
+    @EntityGraph(attributePaths = {"carImages", "renter"})
+    List<Car> findByRenterUserIdAndCarStatus(Long renterId, CarStatus carStatus);
 }

@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,6 +34,8 @@ public class CarResponseDto {
     private FuelType fuelType;
     private Transmission transmission;
     private CarStatus carStatus;
+
+    private List<String> imageUrls;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
