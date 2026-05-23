@@ -6,14 +6,13 @@ import com.devion.velorent.enums.Transmission;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarRequestDto {
-
-    // No renterId here because renter comes from logged-in session
 
     private String brand;
     private String model;
@@ -28,4 +27,6 @@ public class CarRequestDto {
     private FuelType fuelType;
     private Transmission transmission;
     private CarStatus carStatus;
+
+    private List<String> imageUrls;
 }

@@ -11,13 +11,13 @@ public interface CarService {
 
     CarResponseDto createCar(CarRequestDto requestDto, AppUser loggedInUser);
 
-    List<CarResponseDto> getAllCars();
+    List<CarResponseDto> getAllCars(AppUser loggedInUser);
 
-    CarResponseDto getCarById(Long carId);
+    CarResponseDto getCarById(Long carId, AppUser loggedInUser);
 
     List<CarResponseDto> getMyCars(AppUser loggedInUser);
 
-    List<CarResponseDto> getCarsByStatus(CarStatus carStatus);
+    List<CarResponseDto> getCarsByStatus(CarStatus carStatus, AppUser loggedInUser);
 
     CarResponseDto updateCar(Long carId, CarRequestDto requestDto, AppUser loggedInUser);
 

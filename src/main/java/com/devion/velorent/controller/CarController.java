@@ -14,6 +14,9 @@ import java.util.List;
 
 /**
  * Listener/controller for Car APIs.
+ *
+ * All APIs are renter-scoped.
+ * Logged-in renter can only access their own cars.
  */
 @RestController
 @RequestMapping("/api/cars")
@@ -26,10 +29,8 @@ public class CarController {
     }
 
     /**
-     * Create car.
-     * Renter is taken from logged-in session.
-     *
      * POST /api/cars
+     * Create car under logged-in renter.
      */
     @PostMapping
     public ResponseEntity<CarResponseDto> createCar(
@@ -44,19 +45,24 @@ public class CarController {
     }
 
     /**
-     * Get all cars.
-     *
      * GET /api/cars
+     *
+     * Important:
+     * This returns only logged-in renter's cars.
+     * It does NOT return all cars from all renters.
      */
     @GetMapping
-    public ResponseEntity<List<CarResponseDto>> getAllCars() {
-        return ResponseEntity.ok(carService.getAllCars());
+    public ResponseEntity<List<CarResponseDto>> getAllCars(HttpSession session) {
+        AppUser loggedInUser = getLoggedInUser(session);
+
+        return ResponseEntity.ok(carService.getAllCars(loggedInUser));
     }
 
     /**
-     * Get cars owned by current logged-in user.
-     *
      * GET /api/cars/my
+     *
+     * Same behavior as GET /api/cars.
+     * You can keep this for frontend readability.
      */
     @GetMapping("/my")
     public ResponseEntity<List<CarResponseDto>> getMyCars(HttpSession session) {
@@ -66,31 +72,39 @@ public class CarController {
     }
 
     /**
-     * Get car by id.
-     *
      * GET /api/cars/{carId}
+     *
+     * Only owner can view car detail.
      */
     @GetMapping("/{carId}")
-    public ResponseEntity<CarResponseDto> getCarById(@PathVariable Long carId) {
-        return ResponseEntity.ok(carService.getCarById(carId));
+    public ResponseEntity<CarResponseDto> getCarById(
+            @PathVariable Long carId,
+            HttpSession session) {
+
+        AppUser loggedInUser = getLoggedInUser(session);
+
+        return ResponseEntity.ok(carService.getCarById(carId, loggedInUser));
     }
 
     /**
-     * Get cars by status.
+     * GET /api/cars/status/{carStatus}
      *
-     * Example:
-     * GET /api/cars/status/AVAILABLE
+     * Returns cars under logged-in renter filtered by status.
      */
     @GetMapping("/status/{carStatus}")
-    public ResponseEntity<List<CarResponseDto>> getCarsByStatus(@PathVariable CarStatus carStatus) {
-        return ResponseEntity.ok(carService.getCarsByStatus(carStatus));
+    public ResponseEntity<List<CarResponseDto>> getCarsByStatus(
+            @PathVariable CarStatus carStatus,
+            HttpSession session) {
+
+        AppUser loggedInUser = getLoggedInUser(session);
+
+        return ResponseEntity.ok(carService.getCarsByStatus(carStatus, loggedInUser));
     }
 
     /**
-     * Update car.
-     * Only owner can update.
-     *
      * PUT /api/cars/{carId}
+     *
+     * Only owner can update.
      */
     @PutMapping("/{carId}")
     public ResponseEntity<CarResponseDto> updateCar(
@@ -104,10 +118,9 @@ public class CarController {
     }
 
     /**
-     * Delete car.
-     * Only owner can delete.
-     *
      * DELETE /api/cars/{carId}
+     *
+     * Only owner can delete.
      */
     @DeleteMapping("/{carId}")
     public ResponseEntity<Void> deleteCar(
@@ -122,10 +135,7 @@ public class CarController {
     }
 
     /**
-     * Helper method to read logged-in AppUser from session.
-     *
-     * Your AuthController currently stores AppUser under key "username":
-     * session.setAttribute("username", user);
+     * Current AuthController stores AppUser under "username".
      */
     private AppUser getLoggedInUser(HttpSession session) {
         return (AppUser) session.getAttribute("username");
