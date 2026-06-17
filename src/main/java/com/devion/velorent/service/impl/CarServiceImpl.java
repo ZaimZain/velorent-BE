@@ -37,7 +37,7 @@ public class CarServiceImpl implements CarService {
         }
 
         Car car = new Car();
-        car.setRenter(loggedInUser);
+        car.setAgent(loggedInUser);
 
         mapRequestToEntity(car, requestDto);
         setCarImages(car, requestDto.getImageUrls());
@@ -50,14 +50,14 @@ public class CarServiceImpl implements CarService {
     /**
      * Important:
      * This does NOT return all cars in the system.
-     * It only returns cars owned by logged-in renter.
+     * It only returns cars owned by logged-in agent.
      */
     @Override
     @Transactional(readOnly = true)
     public List<CarResponseDto> getAllCars(AppUser loggedInUser) {
         validateLoggedInUser(loggedInUser);
 
-        return carRepository.findByRenterUserId(loggedInUser.getUserId())
+        return carRepository.findByAgentUserId(loggedInUser.getUserId())
                 .stream()
                 .map(this::mapToResponseDto)
                 .collect(Collectors.toList());
@@ -65,7 +65,7 @@ public class CarServiceImpl implements CarService {
 
     /**
      * Important:
-     * Even if user passes another renter's carId,
+     * Even if user passes another agent's carId,
      * backend will block it using validateCarOwner().
      */
     @Override
@@ -85,7 +85,7 @@ public class CarServiceImpl implements CarService {
     public List<CarResponseDto> getMyCars(AppUser loggedInUser) {
         validateLoggedInUser(loggedInUser);
 
-        return carRepository.findByRenterUserId(loggedInUser.getUserId())
+        return carRepository.findByAgentUserId(loggedInUser.getUserId())
                 .stream()
                 .map(this::mapToResponseDto)
                 .collect(Collectors.toList());
@@ -93,7 +93,7 @@ public class CarServiceImpl implements CarService {
 
     /**
      * Important:
-     * Filter by BOTH renter and status.
+     * Filter by BOTH agent and status.
      * Not status only.
      */
     @Override
@@ -105,7 +105,7 @@ public class CarServiceImpl implements CarService {
             throw new BadRequestException("Car status is required");
         }
 
-        return carRepository.findByRenterUserIdAndCarStatus(loggedInUser.getUserId(), carStatus)
+        return carRepository.findByAgentUserIdAndCarStatus(loggedInUser.getUserId(), carStatus)
                 .stream()
                 .map(this::mapToResponseDto)
                 .collect(Collectors.toList());
@@ -201,10 +201,10 @@ public class CarServiceImpl implements CarService {
 
         dto.setCarId(car.getCarId());
 
-        if (car.getRenter() != null) {
-            dto.setRenterId(car.getRenter().getUserId());
-            dto.setRenterUsername(car.getRenter().getUsername());
-            dto.setRenterFullName(car.getRenter().getFullName());
+        if (car.getAgent() != null) {
+            dto.setAgentId(car.getAgent().getUserId());
+            dto.setAgentUsername(car.getAgent().getUsername());
+            dto.setAgentFullName(car.getAgent().getFullName());
         }
 
         dto.setBrand(car.getBrand());
@@ -282,11 +282,11 @@ public class CarServiceImpl implements CarService {
     }
 
     private void validateCarOwner(Car car, AppUser loggedInUser) {
-        if (car.getRenter() == null || loggedInUser == null) {
+        if (car.getAgent() == null || loggedInUser == null) {
             throw new BadRequestException("Unable to verify car owner");
         }
 
-        if (!car.getRenter().getUserId().equals(loggedInUser.getUserId())) {
+        if (!car.getAgent().getUserId().equals(loggedInUser.getUserId())) {
             throw new BadRequestException("You are not allowed to access or modify this car");
         }
     }

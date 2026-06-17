@@ -16,15 +16,15 @@ DELETE FROM users;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ~PHASE 1~
--- USERS								
+-- USERS
 INSERT INTO `velorentdb`.`users` (`username`, `password`, `full_name`, `email`, `phone`, `address`, `id_number`, `id_type`, `role`, `user_status`)
 VALUES
 ('Admin1', 'admin123', 'System Admin 1', 'admin1@velorent.com', '+6016-6002579', 'Sungai Long, Kajang, Selangor', '930811035807', 'IC', 'ADMIN', 'ACTIVE'),
 ('Admin2', 'admin123', 'System Admin 2', 'admin2@velorent.com', '+6016-6002579', 'Sungai Long, Kajang, Selangor', '930811035807', 'IC', 'ADMIN', 'DORMANT'),
 
-('Renter1', 'renter123', 'Eddy Car Rental', 'suhardi@gmail.com', '+6013-3184673', 'Tasik Height, Bandar Tasik Selatan, KL', 'A1234567MY', 'SSM', 'RENTER', 'ACTIVE'),
-('Renter2', 'renter123', 'Trevo', 'admin@trevo.com', '+6016-6002579', 'KL', 'A1234567MY', 'SSM', 'RENTER', 'ACTIVE'),
-('Renter3', 'renter123', 'Socar', 'admin@socar.com', '+6016-6002579', 'KL', 'A1234567MY', 'SSM', 'RENTER', 'ACTIVE'),
+('Agent1', 'agent123', 'Eddy Car Rental', 'suhardi@gmail.com', '+6013-3184673', 'Tasik Height, Bandar Tasik Selatan, KL', 'A1234567MY', 'SSM', 'AGENT', 'ACTIVE'),
+('Agent2', 'agent123', 'Trevo', 'admin@trevo.com', '+6016-6002579', 'KL', 'A1234567MY', 'SSM', 'AGENT', 'ACTIVE'),
+('Agent3', 'agent123', 'Socar', 'admin@socar.com', '+6016-6002579', 'KL', 'A1234567MY', 'SSM', 'AGENT', 'ACTIVE'),
 
 ('Customer1', 'customer123', 'Customer Name 1', 'cust1@gmail.com', '+6016-6002579', 'Sungai Long, Kajang, Selangor', '930811035807', 'IC', 'CUSTOMER', 'ACTIVE'),
 ('Customer2', 'customer123', 'Customer Name 2', 'cust2@gmail.com', '+6016-6002579', 'Sungai Long, Kajang, Selangor', '930811035807', 'IC', 'CUSTOMER', 'ACTIVE'),
@@ -38,7 +38,7 @@ VALUES
 
 
 -- CARS
-INSERT INTO `velorentdb`.`cars` (`renter_id`, `brand`, `model`, `body_type`, `color`, `mileage`, `seat`, `year`, `plate_number`, `daily_rate`, `description`, `fuel_type`, `transmission`, `car_status`)
+INSERT INTO `velorentdb`.`cars` (`agent_id`, `brand`, `model`, `body_type`, `color`, `mileage`, `seat`, `year`, `plate_number`, `daily_rate`, `description`, `fuel_type`, `transmission`, `car_status`)
 VALUES
 (3, 'Toyota', 'Vios', 'Sedan', 'Black', 33000, 4, '2020', 'DAK2122', 110.00, 'Description Description Description Description', 'PETROL', 'AUTOMATIC', 'AVAILABLE'),
 (3, 'Mazda', 'CX-5', 'SUV', 'Black', 33000, 4, '2021', 'DBK2122', 120.00, 'Description Description Description Description', 'PETROL', 'MANUAL', 'AVAILABLE'),
@@ -167,10 +167,10 @@ VALUES
 -- (2, 'Add Car', 'Added Honda Civic to fleet'),
 -- (3, 'Book Car', 'Booked Perodua Myvi for 3 days');
 -- INSERT INTO system_logs (log_id, user_id, action, description, log_time) VALUES
--- (1,  1,  'CREATE_USER',     'Admin menambah akaun renter baharu.',                     '2025-09-25 09:00:00'),
--- (2,  3,  'ADD_CAR',         'Renter menambah Perodua Myvi ke dalam sistem.',           '2025-09-25 09:20:00'),
--- (3,  4,  'ADD_CAR',         'Renter menambah Proton X50 ke dalam sistem.',             '2025-09-25 09:30:00'),
--- (4,  5,  'ADD_CAR',         'Renter menambah BMW X3 ke dalam sistem.',                 '2025-09-25 09:40:00'),
+-- (1,  1,  'CREATE_USER',     'Admin menambah akaun agent baharu.',                     '2025-09-25 09:00:00'),
+-- (2,  3,  'ADD_CAR',         'Agent menambah Perodua Myvi ke dalam sistem.',           '2025-09-25 09:20:00'),
+-- (3,  4,  'ADD_CAR',         'Agent menambah Proton X50 ke dalam sistem.',             '2025-09-25 09:30:00'),
+-- (4,  5,  'ADD_CAR',         'Agent menambah BMW X3 ke dalam sistem.',                 '2025-09-25 09:40:00'),
 -- (5,  6,  'BOOK_CAR',        'Customer membuat tempahan Perodua Myvi.',                 '2025-09-30 08:10:00'),
 -- (6,  7,  'BOOK_CAR',        'Customer membuat tempahan Toyota Vios.',                  '2025-10-01 09:15:00'),
 -- (7,  8,  'BOOK_CAR',        'Customer membuat tempahan Honda City.',                   '2025-10-02 10:20:00'),

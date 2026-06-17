@@ -2,18 +2,18 @@ USE velorentdb;
 
 -- DROP TABLES
 DROP TABLE IF EXISTS payments;
+-- DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS rentals;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS car_images;
 DROP TABLE IF EXISTS cars;
-DROP TABLE IF EXISTS users;
--- DROP TABLE IF EXISTS reviews;
 -- DROP TABLE IF EXISTS notifications;
 -- DROP TABLE IF EXISTS system_logs;
+DROP TABLE IF EXISTS users;
 
 
 -- ~PHASE 1~
--- USERS (for admin, renter, customer)
+-- USERS (for admin, agent, customer)
 CREATE TABLE IF NOT EXISTS velorentdb.users (
   user_id BIGINT AUTO_INCREMENT PRIMARY KEY,
   username varchar(255) DEFAULT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS velorentdb.users (
   address VARCHAR(255),
   id_number VARCHAR(25) NOT NULL,
   id_type ENUM('SSM', 'IC', 'PASSPORT') NOT NULL,
-  role ENUM('ADMIN', 'RENTER', 'CUSTOMER') NOT NULL,
+  role ENUM('ADMIN', 'AGENT', 'CUSTOMER') NOT NULL,
   user_status ENUM('ACTIVE', 'DORMANT', 'INACTIVE') NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP  
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS velorentdb.users (
 -- CARS
 CREATE TABLE IF NOT EXISTS velorentdb.cars (
   car_id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  renter_id BIGINT NOT NULL,
+  agent_id BIGINT NOT NULL,
   brand VARCHAR(50),
   model VARCHAR(50),
   body_type VARCHAR(50),
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS velorentdb.cars (
   car_status ENUM('AVAILABLE','RENTED','MAINTENANCE') NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (renter_id) REFERENCES users(user_id)
+  FOREIGN KEY (agent_id) REFERENCES users(user_id)
 );
 
 -- CAR IMAGES

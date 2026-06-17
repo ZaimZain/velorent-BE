@@ -17,9 +17,9 @@ public class CarResponseDto {
 
     private Long carId;
 
-    private Long renterId;
-    private String renterUsername;
-    private String renterFullName;
+    private Long agentId;
+    private String agentUsername;
+    private String agentFullName;
 
     private String brand;
     private String model;
