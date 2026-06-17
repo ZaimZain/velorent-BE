@@ -16,12 +16,12 @@ public interface CarRepository extends JpaRepository<Car, Long> {
 
     boolean existsByPlateNumberAndCarIdNot(String plateNumber, Long carId);
 
-    @EntityGraph(attributePaths = {"carImages", "renter"})
+    @EntityGraph(attributePaths = {"carImages", "agent"})
     Optional<Car> findByCarId(Long carId);
 
-    @EntityGraph(attributePaths = {"carImages", "renter"})
-    List<Car> findByRenterUserId(Long renterId);
+    @EntityGraph(attributePaths = {"carImages", "agent"})
+    List<Car> findByAgentUserId(Long agentId);
 
-    @EntityGraph(attributePaths = {"carImages", "renter"})
-    List<Car> findByRenterUserIdAndCarStatus(Long renterId, CarStatus carStatus);
+    @EntityGraph(attributePaths = {"carImages", "agent"})
+    List<Car> findByAgentUserIdAndCarStatus(Long agentId, CarStatus carStatus);
 }

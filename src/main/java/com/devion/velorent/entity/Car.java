@@ -25,8 +25,8 @@ public class Car {
     private Long carId;
 
     @ManyToOne
-    @JoinColumn(name = "renter_id", nullable = false)
-    private AppUser renter;
+    @JoinColumn(name = "agent_id", nullable = false)
+    private AppUser agent;
 
     private String brand;
     private String model;

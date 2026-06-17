@@ -54,6 +54,6 @@ public class AppUser {
     @Column(name = "updated_at", updatable = false, insertable = false)
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "renter")
+    @OneToMany(mappedBy = "agent")
     private List<Car> cars;
 }
