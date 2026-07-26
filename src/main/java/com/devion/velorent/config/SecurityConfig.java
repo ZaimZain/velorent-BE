@@ -1,7 +1,6 @@
 package com.devion.velorent.config;
 
-import com.devion.velorent.service.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -14,26 +13,56 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-    @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    @Value("${app.auth.enabled:true}")
+    private boolean authEnabled;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
+            .cors(Customizer.withDefaults())
+            .csrf(AbstractHttpConfigurer::disable);
+        
+        // DEVELOPMENT ONLY    
+        if (!authEnabled) {
+            http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/cars/**").permitAll()
-                        .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                 )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                )
-                .formLogin(AbstractHttpConfigurer::disable)
-                .httpBasic(AbstractHttpConfigurer::disable);
+                .sessionManagement(session ->
+                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                );
+        } else {
+            http
+                .authorizeHttpRequests(auth -> auth
 
+                    // Login/logout/refresh token
+                    .requestMatchers("/api/auth/**").permitAll()
+
+                    // Admin only
+                    .requestMatchers("/api/admin/**")
+                    .hasRole("ADMIN")
+
+                    // Agent and Admin
+                    .requestMatchers("/api/cars/**")
+                    .hasAnyRole("ADMIN", "AGENT")
+
+                    .requestMatchers("/api/customers/**")
+                    .hasAnyRole("ADMIN", "AGENT")
+
+                    .requestMatchers("/api/rentals/**")
+                    .hasAnyRole("ADMIN", "AGENT")
+
+                    // Everything else requires login
+                    .anyRequest()
+                    .authenticated()
+                )
+                .sessionManagement(session ->
+                    session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                );
+        }
+        http
+            .formLogin(AbstractHttpConfigurer::disable)
+            .httpBasic(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }

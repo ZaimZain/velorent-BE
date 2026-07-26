@@ -1,6 +1,7 @@
 USE velorentdb;
 
 -- DROP TABLES
+DROP TABLE IF EXISTS refresh_tokens;
 DROP TABLE IF EXISTS payments;
 -- DROP TABLE IF EXISTS reviews;
 DROP TABLE IF EXISTS rentals;
@@ -108,6 +109,14 @@ CREATE TABLE IF NOT EXISTS velorentdb.payments (
   FOREIGN KEY (rental_id) REFERENCES rentals(rental_id)
 );
 
+CREATE TABLE velorentdb.refresh_tokens (
+    token_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    token VARCHAR(500) NOT NULL,
+    expiry_date DATETIME NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
 
 -- ~PHASE 2~
 -- REVIEWS

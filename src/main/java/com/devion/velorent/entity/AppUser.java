@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +25,9 @@ public class AppUser {
 
     private String username;
     private String password;    //store hashed password
+
+    @Column(nullable=false)
+    private Boolean enabled = true;
 
     @Column(name = "full_name")
     private String fullName;
@@ -54,6 +58,7 @@ public class AppUser {
     @Column(name = "updated_at", updatable = false, insertable = false)
     private LocalDateTime updatedAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "agent")
     private List<Car> cars;
 }

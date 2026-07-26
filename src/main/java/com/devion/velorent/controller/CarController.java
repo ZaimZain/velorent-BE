@@ -5,6 +5,7 @@ import com.devion.velorent.dto.car.CarResponseDto;
 import com.devion.velorent.entity.AppUser;
 import com.devion.velorent.enums.CarStatus;
 import com.devion.velorent.service.CarService;
+import com.devion.velorent.service.CurrentUserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,14 @@ public class CarController {
 
     private final CarService carService;
 
-    public CarController(CarService carService) {
+    private final CurrentUserService currentUserService;
+
+    public CarController(
+            CarService carService,
+            CurrentUserService currentUserService
+    ) {
         this.carService = carService;
+        this.currentUserService = currentUserService;
     }
 
     /**
@@ -138,6 +145,6 @@ public class CarController {
      * Current AuthController stores AppUser under "username".
      */
     private AppUser getLoggedInUser(HttpSession session) {
-        return (AppUser) session.getAttribute("username");
+        return currentUserService.getCurrentUser(session);
     }
 }

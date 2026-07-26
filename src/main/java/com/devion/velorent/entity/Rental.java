@@ -3,7 +3,7 @@ package com.devion.velorent.entity;
 import com.devion.velorent.enums.RentalStatus;
 import jakarta.persistence.*;
 import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,13 +21,19 @@ public class Rental {
     @Column(name = "rental_id")
     private Long rentalId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
 
     @Column(name = "total_amount", precision = 10, scale = 2)
     private BigDecimal totalAmount;
