@@ -24,6 +24,7 @@ public class Car {
     @Column(name = "car_id")
     private Long carId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "agent_id", nullable = false)
     private AppUser agent;
